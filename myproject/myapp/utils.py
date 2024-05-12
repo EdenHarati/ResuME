@@ -3,7 +3,6 @@
 import openai
 def generate_cv(current_cv, role_description, api_key):
     # openai.api_key = api_key
-    openai.api_key = "sk-proj-xY7FydoT1deNvuZYVqPkT3BlbkFJipy8DVFQLHCCZVuyUaDe"
     # current_cv = "Name: Eden \n Age: 28 \n Role: Java Developer\n Year of experience: 1 year"
     # role_description = "we Are looking for a new developer with 2 years of Java experience, a good group work abilities"
     response = openai.Completion.create(
