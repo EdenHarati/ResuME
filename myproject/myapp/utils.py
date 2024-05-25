@@ -14,4 +14,4 @@ def generate_cv(current_cv, role_description, api_key):
     generated_cv = response.choices[0].text.strip()
     return generated_cv
 
-generate_cv("Name: Eden \n Age: 28 \n Role: Java Developer\n Year of experience: 1 year", "we Are looking for a new developer with 2 years of Java experience, a good group work abilities", "3")
+generate_cv("Name: Eden \n Age: 28 \n Role: Java Developer\n Year of experience: 1 year", "we Are looking for a new developer with 2 years of Java experience, a good group work abilities", "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")

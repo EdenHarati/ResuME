@@ -4,6 +4,8 @@ from django.http import HttpResponse
 from django.shortcuts import render
 # from .forms import CVForm TODO
 from .utils import generate_cv
+from django.shortcuts import render, redirect
+from .forms import UploadFileForm
 
 
 def index(request):
@@ -11,6 +13,20 @@ def index(request):
 
 def about(request):
     return HttpResponse("This is the about page.")
+
+def upload_file(request):
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('upload_success')
+    else:
+        form = UploadFileForm()
+    return render(request, 'upload.html', {'form': form})
+
+def upload_success(request):
+    return render(request, 'upload_success.html')
+
 
 # TODO
 # def generate_cv_view(request):
