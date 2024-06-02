@@ -85,7 +85,7 @@ def upload_cv_file(request):
     return render(request, 'uploadCV.html', {'form': form})
 
 def upload_success(request):
-    result = generate_cv(current_cv, role_description, " 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")
+    result = generate_cv(current_cv, role_description, " sk-")
     result_with_new_lines = result.replace('. ', '.\n')
     return render(request, 'upload_success.html', {'result': result_with_new_lines})
 
