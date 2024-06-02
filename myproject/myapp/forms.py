@@ -18,11 +18,10 @@ from django.contrib.auth.forms import AuthenticationForm
 
 class SignUpForm(UserCreationForm):
     email = forms.EmailField(required=True, widget=forms.EmailInput(attrs={'class': 'form-control'}))
-    profile_picture = forms.ImageField(required=False, widget=forms.FileInput(attrs={'class': 'form-control'}))
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'password1', 'password2', 'profile_picture')
+        fields = ('username', 'email', 'password1', 'password2')
 
 
 

@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 
 from .forms import SignInForm
 from .forms import SignUpForm
@@ -20,7 +21,7 @@ role_description = "Initial Job Description"
 # myapp/views.py
 
 
-# myapp/views.py
+
 
 
 
@@ -29,33 +30,12 @@ def sign_up_view(request):
         form = SignUpForm(request.POST, request.FILES)
         if form.is_valid():
             user = form.save()
-            profile_picture = form.cleaned_data.get('profile_picture')
-            if profile_picture:
-                user.profile.profile_picture = profile_picture
-                user.profile.save()
+
             login(request, user)
             return render(request, 'registration_success.html', {'user': user})  # Render a success page
     else:
         form = SignUpForm()
     return render(request, 'sign_up.html', {'form': form})
-
-
-
-def sign_in_view(request):
-    if request.method == 'POST':
-        form = SignInForm(request, data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect('home')  # Redirect to a success page
-    else:
-        form = SignInForm()
-    return render(request, 'sign_in.html', {'form': form})
-
-
 
 
 def index(request):
@@ -105,7 +85,7 @@ def upload_cv_file(request):
     return render(request, 'uploadCV.html', {'form': form})
 
 def upload_success(request):
-    result = generate_cv(current_cv, role_description, " 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")
+    result = generate_cv(current_cv, role_description, " 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")
     result_with_new_lines = result.replace('. ', '.\n')
     return render(request, 'upload_success.html', {'result': result_with_new_lines})
 
@@ -115,6 +95,7 @@ def upload_success(request):
 def modify_cv(cv):
     global current_cv
     current_cv = cv
+
 
 def modify_job_description(jd):
     global role_description
@@ -152,7 +133,7 @@ def sign_in_view(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('home')  # Redirect to a success page
+                return redirect('upload_job_file')  # Redirect to a success page
     else:
         form = SignInForm()
     return render(request, 'sign_in.html', {'form': form})
