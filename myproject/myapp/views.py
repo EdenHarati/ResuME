@@ -1,18 +1,41 @@
-from audioop import reverse
-
 # myapp/views.py
+from django.contrib.auth import authenticate
+from django.contrib.auth import login
 from django.http import HttpResponse
-from django.shortcuts import render
-# from .forms import CVForm TODO
-from .utils import generate_cv
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+
+from .forms import SignInForm
+from .forms import SignUpForm
+# from .forms import CVForm TODO
 from .forms import UploadFileForm
 from .utils import generate_cv
+
 # global current_cv
 # global role_description
 
 current_cv = "Initial CV"
 role_description = "Initial Job Description"
+
+
+# myapp/views.py
+
+
+
+
+
+
+def sign_up_view(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST, request.FILES)
+        if form.is_valid():
+            user = form.save()
+
+            login(request, user)
+            return render(request, 'registration_success.html', {'user': user})  # Render a success page
+    else:
+        form = SignUpForm()
+    return render(request, 'sign_up.html', {'form': form})
 
 
 def index(request):
@@ -62,7 +85,7 @@ def upload_cv_file(request):
     return render(request, 'uploadCV.html', {'form': form})
 
 def upload_success(request):
-    result = generate_cv(current_cv, role_description, "sk-")
+    result = generate_cv(current_cv, role_description, " sk-")
     result_with_new_lines = result.replace('. ', '.\n')
     return render(request, 'upload_success.html', {'result': result_with_new_lines})
 
@@ -72,6 +95,7 @@ def upload_success(request):
 def modify_cv(cv):
     global current_cv
     current_cv = cv
+
 
 def modify_job_description(jd):
     global role_description
@@ -90,3 +114,26 @@ def modify_job_description(jd):
 #     else:
 #         form = CVForm()
 #     return render(request, 'generate_cv.html', {'form': form})
+
+
+
+
+
+
+
+# myapp/views.py
+
+
+def sign_in_view(request):
+    if request.method == 'POST':
+        form = SignInForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('upload_job_file')  # Redirect to a success page
+    else:
+        form = SignInForm()
+    return render(request, 'sign_in.html', {'form': form})
