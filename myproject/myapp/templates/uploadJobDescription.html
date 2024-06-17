@@ -1,16 +1,51 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload The Desired Job Description</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: white;
+            color: blue;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            max-width: 600px;
+            padding: 20px;
+            background-color: #d2d8da;
+            border-radius: 5px;
+            text-align: center; /* Center align the content */
+        }
+        .container form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container form input[type="text"] {
+            margin-top: 10px;
+            width: 200px;
+        }
+        .container form button[type="submit"] {
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Upload The Desired Job Description</h1>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Upload</button>
-    </form>
+    <div class="container">
+        <h1>Upload Job Description</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+          
+            {{ form.as_p }}
+            <button type="submit">Upload</button>
+        </form>
+    </div>
 </body>
 </html>

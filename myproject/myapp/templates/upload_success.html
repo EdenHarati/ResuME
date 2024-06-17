@@ -1,13 +1,64 @@
-<!-- upload_success.html -->
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <h1>Here is your new CV!</h1>
+    <meta charset="UTF-8">
+    <title>Generated CV</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: white;
+            color: blue;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        h1 {
+            text-align: center;
+            color: blue;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        .box {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            width: 30%;
+            margin: 10px;
+            padding: 20px;
+            overflow-y: auto;
+            height: 400px;
+        }
+        .box h2 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #555;
+        }
+        .box pre {
+            white-space: pre-wrap; /* Preserve whitespace and line breaks */
+            word-wrap: break-word; /* Break long words */
+        }
+    </style>
 </head>
 <body>
-{#    <h1>Upload Success</h1>#}
-{#    <p>{{ result }}</p>#}
-    <p>{{ result | linebreaks }}</p>
+    <h1>Here is your new CV!</h1>
+    <div class="container">
+        <div class="box">
+            <h2>Current CV</h2>
+            <pre>{{ current_cv }}</pre>
+        </div>
+        <div class="box">
+            <h2>Job Description</h2>
+            <pre>{{ role_description }}</pre>
+        </div>
+        <div class="box">
+            <h2>Generated CV</h2>
+            <pre>{{ result | linebreaks }}</pre>
+        </div>
+    </div>
 </body>
 </html>

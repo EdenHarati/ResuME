@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Files</title>
+</head>
+<body>
+    <h2>Select Files</h2>
+    <form method="post">
+        {% csrf_token %}
+        <label for="job_description">Select Job Description:</label>
+        <select name="job_description" id="job_description">
+            {% for job_description in job_descriptions %}
+            <option value="{{ job_description.id }}">{{ job_description.name }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="current_cv">Select Current CV:</label>
+        <select name="current_cv" id="current_cv">
+            {% for cv in cvs %}
+            <option value="{{ cv.id }}">{{ cv.name }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

@@ -10,6 +10,7 @@ urlpatterns = [
     path('uploadsuccess/', views.upload_success, name='upload_success'),
     path('sign-in/', views.sign_in_view, name='sign_in'),
     path('sign-up/', views.sign_up_view, name='sign_up'),
+   # path('select-files/', views.select_files, name='select_files'),
 ]
 
 # myapp/urls.py
