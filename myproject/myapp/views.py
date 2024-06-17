@@ -82,8 +82,8 @@ def upload_job_file(request):
 def upload_success(request):
     current_cv = request.session.get('current_cv', 'Initial CV')
     role_description = request.session.get('role_description', 'Initial Job Description')
-    result = generate_cv(current_cv, role_description, " sk-")
-    result_with_new_lines = result.replace('. ', '.\n')
+    result =None #generate_cv(current_cv, role_description, " sk-")
+    result_with_new_lines = None#result.replace('. ', '.\n')
     return render(request, 'upload_success.html', {'result': result_with_new_lines})
 
 @login_required
