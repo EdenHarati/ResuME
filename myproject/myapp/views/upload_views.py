@@ -10,7 +10,7 @@ class UploadCVFileView(LoginRequiredMixin, View):
         form = UploadFileForm()
         return render(request, 'uploadCV.html', {'form': form})
     
-    def modify_cv(request, cv):
+    def modify_cv(self, request, cv):
         request.session['current_cv'] = cv
 
     def post(self, request):
@@ -33,7 +33,7 @@ class UploadJobFileView(LoginRequiredMixin, View):
         return render(request, 'uploadJobDescription.html', {'form': form})
     
 
-    def modify_job_description(request, jd):
+    def modify_job_description(self, request, jd):
         request.session['role_description'] = jd
 
     def post(self, request):
