@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Adapter</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f2f2f2;
+        }
+        
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            margin-top: 50px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            color: #007bff;
+        }
+        
+        .btn-custom {
+            background-color: #007bff;
+            color: #ffffff;
+            margin: 5px;
+        }
+        
+        .text-container {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="text-container">
+            <h1>Resume Adapter</h1>
+            <p>Create your resume effortlessly by tailoring it to match the job description.</p>
+            <a href="{% url 'sign_in' %}" class="btn btn-custom">Sign In</a>
+            <a href="{% url 'sign_up' %}" class="btn btn-custom">Sign Up</a>
+        </div>
+    </div>
+</body>
+</html>
