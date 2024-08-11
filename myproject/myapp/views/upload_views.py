@@ -56,4 +56,4 @@ class UploadSuccessView(LoginRequiredMixin, View):
         role_description = request.session.get('role_description', 'Initial Job Description')
         result = None # generate_cv(current_cv, role_description, " sk-")
         result_with_new_lines = None # result.replace('. ', '.\n')
-        return render(request, 'upload_success.html', {'result': result_with_new_lines})
+        return render(request, 'upload_success.html', {'result': result_with_new_lines, 'current_cv': current_cv, 'role_description': role_description})

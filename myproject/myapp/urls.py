@@ -3,7 +3,7 @@
 # from . import views
 
 from django.urls import path
-from .views.auth_views import SignUpView, SignInView
+from .views.auth_views import SignUpView, SignInView, SignOutView
 from .views.upload_views import UploadCVFileView, UploadJobFileView, UploadSuccessView
 from .views.user_views import ViewUserCVView, ViewUsernamesView
 from .views.general_views import AboutView, HomepageView
@@ -13,6 +13,7 @@ urlpatterns = [
     path('about/', AboutView.as_view(), name='about'),
     path('sign-up/', SignUpView.as_view(), name='sign_up'),
     path('sign-in/', SignInView.as_view(), name='sign_in'),
+    path('sign_out/', SignOutView.as_view(), name='sign_out'),
     path('upload-cv/', UploadCVFileView.as_view(), name='upload_cv_file'),
     path('upload-job/', UploadJobFileView.as_view(), name='upload_job_file'),
     path('upload-success/', UploadSuccessView.as_view(), name='upload_success'),

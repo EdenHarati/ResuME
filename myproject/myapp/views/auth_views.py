@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -36,3 +36,9 @@ class SignInView(View):
                 login(request, user)
                 return redirect('upload_job_file')
         return render(request, sign_in_page, {'form': form})
+
+
+class SignOutView(View):
+    def get(self, request):
+        logout(request)
+        return redirect('sign_in')
