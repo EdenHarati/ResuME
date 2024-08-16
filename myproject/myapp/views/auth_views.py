@@ -19,7 +19,7 @@ class SignUpView(View):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return render(request, 'registration_success.html', {'user': user})
+            return redirect('choose_main_flow')
         return render(request, sign_up_page, {'form': form})
 
 

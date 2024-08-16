@@ -26,11 +26,13 @@
             flex-direction: column;
             align-items: center;
         }
-        .container form input[type="text"],
+        .container form input[type="checkbox"],
+        .container form select,
+        .container form input[type="file"],
         .container form button[type="submit"],
         .container form a {
             margin-top: 10px;
-            width: 200px;
+            width: 300px;
         }
         .container form a {
             display: block;
@@ -41,6 +43,10 @@
             border-radius: 5px;
             text-decoration: none;
         }
+        #existing-cv-field, #upload-file-field {
+            width: 100%;
+            margin: 0 auto;
+        }
     </style>
 </head>
 <body>
@@ -48,10 +54,43 @@
         <h1>Upload Your Current CV File</h1>
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            {{ form.as_p }}
+            <div>
+                {{ form.use_existing_cv }}
+                <label for="{{ form.use_existing_cv.id_for_label }}">Use an existing CV?</label>
+            </div>
+
+            <div id="existing-cv-field" style="display: none;">
+                {{ form.existing_cv.label_tag }}
+                {{ form.existing_cv }}
+            </div>
+
+            <div id="upload-file-field" style="display: block;">
+                {{ form.file.label_tag }}
+                {{ form.file }}
+            </div>
+
             <button type="submit" class="btn btn-primary">Upload</button>
             <a href="{% url 'sign_out' %}" class="btn btn-secondary">Sign Out</a>
         </form>
     </div>
+
+    <script>
+        const useExistingCVCheckbox = document.getElementById("id_use_existing_cv");
+        const existingCVField = document.getElementById("existing-cv-field");
+        const uploadFileField = document.getElementById("upload-file-field");
+
+        function toggleFields() {
+            if (useExistingCVCheckbox.checked) {
+                existingCVField.style.display = "block";
+                uploadFileField.style.display = "none";
+            } else {
+                existingCVField.style.display = "none";
+                uploadFileField.style.display = "block";
+            }
+        }
+
+        useExistingCVCheckbox.addEventListener("change", toggleFields);
+        toggleFields();  // Initialize the field display on page load
+    </script>
 </body>
 </html>
