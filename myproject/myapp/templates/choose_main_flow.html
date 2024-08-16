@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload Your Current CV File</title>
+    <title>Please Choose:</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <style>
         body {
@@ -26,30 +26,20 @@
             flex-direction: column;
             align-items: center;
         }
-        .container form input[type="text"],
-        .container form button[type="submit"],
+        .container form button,
         .container form a {
             margin-top: 10px;
-            width: 200px;
-        }
-        .container form a {
-            display: block;
-            text-align: center;
-            background-color: #6c757d;
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            text-decoration: none;
+            width: 400px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Upload Your Current CV File</h1>
-        <form method="post" enctype="multipart/form-data">
+        <h1>Please choose:</h1>
+        <form method="post">
             {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="btn btn-primary">Upload</button>
+            <button type="submit" name="existingCV" class="btn btn-primary">I already have a previous CV!</button>
+            <button type="submit" name="NewCV" class="btn btn-primary">I don't have a previous CV</button>
             <a href="{% url 'sign_out' %}" class="btn btn-secondary">Sign Out</a>
         </form>
     </div>

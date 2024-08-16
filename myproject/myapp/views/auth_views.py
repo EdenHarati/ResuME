@@ -8,6 +8,7 @@ from ..forms import SignInForm, SignUpForm
 sign_up_page = 'auth/sign_up.html'
 sign_in_page = 'auth/sign_in.html'
 
+
 class SignUpView(View):
     def get(self, request):
         form = SignUpForm()
@@ -21,10 +22,11 @@ class SignUpView(View):
             return render(request, 'registration_success.html', {'user': user})
         return render(request, sign_up_page, {'form': form})
 
+
 class SignInView(View):
     def get(self, request):
         form = SignInForm()
-        return render(request,sign_in_page, {'form': form})
+        return render(request, sign_in_page, {'form': form})
 
     def post(self, request):
         form = SignInForm(request, data=request.POST)
@@ -34,7 +36,7 @@ class SignInView(View):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('upload_job_file')
+                return redirect('choose_main_flow')
         return render(request, sign_in_page, {'form': form})
 
 
@@ -42,3 +44,5 @@ class SignOutView(View):
     def get(self, request):
         logout(request)
         return redirect('sign_in')
+
+
