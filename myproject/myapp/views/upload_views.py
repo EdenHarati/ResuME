@@ -62,19 +62,18 @@ class UploadSuccessView(LoginRequiredMixin, View):
     def get(self, request):
         current_cv = request.session.get('current_cv', 'Initial CV')
         role_description = request.session.get('role_description', 'Initial Job Description')
-        result = generate_cv(current_cv, role_description, 'sk-')
+        result = generate_cv(current_cv, role_description, 'sk-0')
         result_with_new_lines = result.replace('. ', '.\n')
         return render(request, 'upload_success.html',
                       {'result': result_with_new_lines, 'current_cv': current_cv, 'role_description': role_description})
 
 
 class ChoosingMainFlow(View):
-    # @login_required
+
     def get(self, request):
         # Render the 'choose_main_flow' template when the method is GET
         return render(request, 'choose_main_flow.html')
 
-    # @login_required
     def post(self, request):
         # Handle the POST request
         if 'existingCV' in request.POST:
