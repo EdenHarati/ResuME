@@ -7,6 +7,7 @@ from .views.auth_views import SignUpView, SignInView, SignOutView
 from .views.upload_views import UploadCVFileView, UploadJobFileView, UploadSuccessView, ChoosingMainFlow
 from .views.user_views import ViewUserCVView, ViewUsernamesView
 from .views.general_views import AboutView, HomepageView
+from .views.questionnaire import QuestionnaireView
 
 urlpatterns = [
     path('', HomepageView.as_view(), name='home'),
@@ -20,8 +21,7 @@ urlpatterns = [
     path('view-cv/<str:username>/', ViewUserCVView.as_view(), name='view_user_cv'),
     path('usernames/', ViewUsernamesView.as_view(), name='view_usernames'),
     path('choose-main-flow/', ChoosingMainFlow.as_view(), name='choose_main_flow'),
-    # path('existing-cv-flow/', ExistingCvFlow.as_view(), name='existing_cv_flow'),
-    # path('new-cv-flow/', NewCvFlow.as_view(), name='new_cv_flow'),
+    path('new-cv-flow/', QuestionnaireView.as_view(), name='start_questionnaire'),
 ]
 
 

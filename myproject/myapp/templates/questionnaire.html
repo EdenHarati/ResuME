@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionnaire</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: white;
+            color: blue;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            max-width: 700px;
+            height: 90vh; /* Set a fixed height for the container */
+            overflow-y: auto; /* Enable vertical scrolling */
+            padding: 20px;
+            background-color: #d2d8da;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            margin-bottom: 20px;
+            color: blue;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-control {
+            border-radius: 4px;
+            border: 1px solid #ced4da;
+        }
+        .btn-primary {
+            background-color: blue;
+            border: none;
+            color: white;
+            border-radius: 4px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        .btn-primary:hover {
+            background-color: darkblue;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Please provide the following information to help us create your customized CV:</h1>
+        <form method="post" action="{% url 'start_questionnaire' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="full_name">What is your full name?</label>
+                <input type="text" class="form-control" id="full_name" name="full_name" required>
+            </div>
+            <div class="form-group">
+                <label for="age">How old are you?</label>
+                <input type="number" class="form-control" id="age" name="age" required>
+            </div>
+            <div class="form-group">
+                <label for="address">What is your current address?</label>
+                <input type="text" class="form-control" id="address" name="address" required>
+            </div>
+            <div class="form-group">
+                <label for="contact_number">What is your contact number?</label>
+                <input type="tel" class="form-control" id="contact_number" name="contact_number" required>
+            </div>
+            <div class="form-group">
+                <label for="email">What is your email address?</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="nationality">What is your nationality?</label>
+                <input type="text" class="form-control" id="nationality" name="nationality" required>
+            </div>
+            <div class="form-group">
+                <label for="work_permit">Do you have a work permit or visa for the country you're applying to work in (if applicable)?</label>
+                <input type="text" class="form-control" id="work_permit" name="work_permit">
+            </div>
+            <div class="form-group">
+                <label for="education_level">What is your highest level of education?</label>
+                <input type="text" class="form-control" id="education_level" name="education_level" required>
+            </div>
+            <div class="form-group">
+                <label for="field_of_study">What is your field of study or major?</label>
+                <input type="text" class="form-control" id="field_of_study" name="field_of_study" required>
+            </div>
+            <div class="form-group">
+                <label for="institutions">Which institutions did you attend for your education, and when did you graduate?</label>
+                <textarea class="form-control" id="institutions" name="institutions" rows="3" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="certifications">Do you have any certifications or additional qualifications relevant to your field?</label>
+                <textarea class="form-control" id="certifications" name="certifications" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="languages">What languages do you speak fluently?</label>
+                <textarea class="form-control" id="languages" name="languages" rows="3" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="language_proficiency">What is your proficiency level in each language you speak?</label>
+                <textarea class="form-control" id="language_proficiency" name="language_proficiency" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="work_experience">Do you have any work experience? If yes, please provide details about your previous positions, including job title, company name, duration of employment, and a brief description of your responsibilities.</label>
+                <textarea class="form-control" id="work_experience" name="work_experience" rows="4" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="volunteer_experience">Do you have any volunteer experience or extracurricular activities you'd like to mention?</label>
+                <textarea class="form-control" id="volunteer_experience" name="volunteer_experience" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="skills">Do you have any specific skills or areas of expertise that you'd like to highlight?</label>
+                <textarea class="form-control" id="skills" name="skills" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="software_proficiency">Are you proficient in any software or tools relevant to your field?</label>
+                <textarea class="form-control" id="software_proficiency" name="software_proficiency" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="portfolio">Do you have a portfolio or any work samples that you'd like to share?</label>
+                <textarea class="form-control" id="portfolio" name="portfolio" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="relocation">Are you comfortable relocating for a job opportunity if required?</label>
+                <input type="text" class="form-control" id="relocation" name="relocation">
+            </div>
+            <div class="form-group">
+                <label for="references">Do you have any references who can vouch for your skills and character? If yes, please provide their contact information.</label>
+                <textarea class="form-control" id="references" name="references" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
