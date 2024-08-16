@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
-from ..forms import UploadFileForm
+from ..forms import UploadFileForm, UploadCVFileForm
 from ..models import UploadedFile
 from django.core.exceptions import PermissionDenied
 from ..utils import generate_cv
@@ -9,30 +9,40 @@ from django.core.exceptions import PermissionDenied
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 
-
 class UploadCVFileView(LoginRequiredMixin, View):
 
     def get(self, request):
-        form = UploadFileForm()
+        form = UploadCVFileForm(user=request.user)  # Pass user here
         return render(request, 'uploadCV.html', {'form': form})
 
-    def modify_cv(self, request, cv):
-        request.session['current_cv'] = cv
+    def modify_cv(self, request, cv_content):
+        request.session['current_cv'] = cv_content
 
     def post(self, request):
-        form = UploadFileForm(request.POST, request.FILES)
+        form = UploadCVFileForm(request.POST, request.FILES, user=request.user)  # Pass user here
         if form.is_valid():
-            uploaded_file_instance = form.save(commit=False)
-            uploaded_file_instance.user = request.user
-            uploaded_file_instance.save()
+            use_existing_cv = form.cleaned_data.get('use_existing_cv')
+            if use_existing_cv:
+                # Use the selected existing file
+                selected_file = form.cleaned_data.get('existing_cv')
+                if selected_file and selected_file.file:
+                    # Read the file content directly from the file object
+                    file_content = selected_file.file.read().decode()  # Decode if it's text content
+                else:
+                    file_content = None
+            else:
+                # Handle new file upload
+                uploaded_file_instance = form.save(commit=False)
+                uploaded_file_instance.user = request.user
+                uploaded_file_instance.save()
+                file_content = uploaded_file_instance.file.read().decode()  # Decode if it's text content
 
-            file_path = uploaded_file_instance.file.path
-            with open(file_path, 'r') as file:
-                current_cv = file.read()
-            self.modify_cv(request, current_cv)
+            if file_content:
+                self.modify_cv(request, file_content)
+
             return redirect('upload_job_file')
-        return render(request, 'uploadCV.html', {'form': form})
 
+        return render(request, 'uploadCV.html', {'form': form})
 
 class UploadJobFileView(LoginRequiredMixin, View):
 
