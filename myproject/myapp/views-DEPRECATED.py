@@ -1,4 +1,4 @@
-# myapp/views.py
+# myapp/views-DEPRECATED.py
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
