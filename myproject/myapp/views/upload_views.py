@@ -8,6 +8,9 @@ from ..utils import generate_cv
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
+from django.core.files.base import ContentFile
+from django.http import JsonResponse
+api_key = "sk-0"
 
 class UploadCVFileView(LoginRequiredMixin, View):
 
@@ -68,16 +71,57 @@ class UploadJobFileView(LoginRequiredMixin, View):
         return render(request, 'uploadJobDescription.html', {'form': form})
 
 
+
+
 class UploadSuccessView(LoginRequiredMixin, View):
     def get(self, request):
         current_cv = request.session.get('current_cv', 'Initial CV')
         role_description = request.session.get('role_description', 'Initial Job Description')
-        result = generate_cv(current_cv, role_description, 'sk-0')
+        result = generate_cv(current_cv, role_description, '', api_key)
         result_with_new_lines = result.replace('. ', '.\n')
-        return render(request, 'upload_success.html',
-                      {'result': result_with_new_lines, 'current_cv': current_cv, 'role_description': role_description})
+        return render(request, 'upload_success.html', {
+            'result': result_with_new_lines,
+            'current_cv': current_cv,
+            'role_description': role_description
+        })
 
+    def post(self, request):
+        current_cv = request.POST.get('base_cv')
+        role_description = request.POST.get('job_description')
+        notes = request.POST.get('notes', '')
+        result = generate_cv(current_cv, role_description, notes, api_key)
+        result_with_new_lines = result.replace('. ', '.\n')
+        request.session['current_cv'] = current_cv
+        request.session['role_description'] = role_description
+        request.session['notes'] = notes
+        return render(request, 'upload_success.html', {
+            'result': result_with_new_lines,
+            'current_cv': current_cv,
+            'role_description': role_description,
+            'notes': notes
+        })  
+    
 
+class SaveGeneratedCVView(LoginRequiredMixin, View):
+    
+    def post(self, request):
+        form = UploadCVFileForm(request.POST, request.FILES, user=request.user)
+        if form.is_valid():
+            uploaded_file_instance = form.save(commit=False)
+            uploaded_file_instance.user = request.user
+            uploaded_file_instance.save()
+            file_content = uploaded_file_instance.file.read().decode()  # Decode if it's text content
+
+            # Save the generated CV to the same UploadedFile instance
+            uploaded_file_instance.file.save(
+                f"{uploaded_file_instance.file.name.split('.')[0]}_generated.txt",
+                ContentFile(file_content)
+            )
+
+            
+        else:
+            return JsonResponse({'success': False, 'errors': form.errors}, status=400)
+    
 class ChoosingMainFlow(View):
 
     def get(self, request):
