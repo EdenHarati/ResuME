@@ -10,8 +10,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.core.files.base import ContentFile
 from django.http import JsonResponse
-from myproject.myproject import settings
-from myproject import settings
+# from myproject.myproject import settings
+# from myproject import settings
+from django.conf import settings
 
 api_key = settings.API_KEY
 
