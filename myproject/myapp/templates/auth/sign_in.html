@@ -1,5 +1,3 @@
-<!-- myapp/templates/sign_in.html -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,28 +6,47 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <style>
         body {
-            background-color: #f2f2f2;
+            background-color: #102a43; /* Dark blue background */
+            color: #ffffff; /* White text color */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
         }
-        
+
         .container {
-            background-color: #ffffff;
+            background-color: #243b53; /* Slightly lighter blue for contrast */
             padding: 20px;
-            margin-top: 50px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        
-        h2 {
-            color: #007bff;
-        }
-        
-        form {
             margin-top: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px; /* Limit width for better appearance */
+            width: 100%;
         }
-        
+
+        h2 {
+            color: #f25c54; /* Red color for headers */
+            margin-bottom: 20px;
+        }
+
+        form {
+            margin-top: 10px;
+        }
+
         button {
-            background-color: #007bff;
+            background-color: #f25c54; /* Red button color */
             color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #e03e3e; /* Slightly darker red for hover effect */
         }
     </style>
 </head>

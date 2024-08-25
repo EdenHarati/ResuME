@@ -1,18 +1,95 @@
-<!-- myapp/templates/sign_up.html -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Sign Up</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #102a43; /* Dark blue background */
+            color: #ffffff; /* White text color */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            background-color: #243b53; /* Slightly lighter blue for contrast */
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px; /* Limit width for better appearance */
+            width: 100%;
+        }
+
+        h2 {
+            color: #f25c54; /* Red color for headers */
+            margin-bottom: 20px;
+            text-align: center; /* Center the header */
+        }
+
+        form {
+            margin-top: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 15px; /* Space between form elements */
+        }
+
+        .form-text {
+            font-size: 0.875rem; /* Smaller font size for help text */
+            color: #b0b0b0; /* Lighter color for help text */
+            margin-top: 5px; /* Space between input field and help text */
+        }
+
+        button {
+            background-color: #f25c54; /* Red button color */
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%; /* Full width button */
+        }
+
+        button:hover {
+            background-color: #e03e3e; /* Slightly darker red for hover effect */
+        }
+    </style>
 </head>
 <body>
 <div class="container">
     <h2>Sign Up</h2>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
+
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" name="username" required>
+            <small class="form-text">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</small>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password_confirmation">Password Confirmation</label>
+            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
+            <small class="form-text">Enter the same password as before, for verification.</small>
+        </div>
+
         <button type="submit" class="btn btn-primary">Sign Up</button>
     </form>
 </div>

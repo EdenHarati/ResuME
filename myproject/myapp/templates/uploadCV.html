@@ -7,45 +7,108 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <style>
         body {
-            background-color: white;
-            color: blue;
+            background-color: #102a43; /* Dark blue background */
+            color: #ffffff; /* White text color */
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
         }
         .container {
-            max-width: 600px;
-            padding: 20px;
-            background-color: #d2d8da;
-            border-radius: 5px;
+            max-width: 700px;
+            padding: 40px;
+            background-color: #243b53; /* Slightly lighter blue background for contrast */
+            border-radius: 10px;
             text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        }
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #f0f4f8; /* Light text color for headings */
         }
         .container form {
             display: flex;
             flex-direction: column;
             align-items: center;
         }
-        .container form input[type="checkbox"],
+        .container form label,
         .container form select,
         .container form input[type="file"],
         .container form button[type="submit"],
         .container form a {
-            margin-top: 10px;
-            width: 300px;
+            margin-top: 15px;
+            width: 100%;
+            max-width: 400px;
+        }
+        .file-input-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            margin-top: 15px;
+            text-align: center; /* Center the content within the wrapper */
+            margin-left: 15%; /* Increased value to move the input further right */
+        }
+        .file-input-wrapper input[type="file"] {
+            margin-top: 5px;
+            padding: 5px;
+            font-size: 0.9rem;
+            display: block; /* Ensure the input takes up full width */
+            text-align: center;
+        }
+        .container form select {
+            display: block;
+            margin: 0 auto; /* Center the select dropdown horizontally */
         }
         .container form a {
             display: block;
             text-align: center;
-            background-color: #6c757d;
+            background-color: #d64933; /* Red button color */
             color: white;
             padding: 10px;
             border-radius: 5px;
             text-decoration: none;
+            margin-top: 20px;
         }
-        #existing-cv-field, #upload-file-field {
+        .btn-primary {
+            background-color: #f25c54; /* Red button color */
+            border-color: #f25c54;
+            color: #ffffff;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            border: none; /* Ensure no border */
+        }
+        .btn-secondary {
+            background-color: #334e68; /* Grey button color */
+            border-color: #334e68;
+            color: #ffffff;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            border: none; /* Ensure no border */
+        }
+        #existing-cv-field,
+        #upload-file-field {
             width: 100%;
             margin: 0 auto;
+            text-align: center;
+        }
+        .form-check-inline {
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .form-check-inline label {
+            margin-right: 10px; /* Space between label and checkbox */
+        }
+        #existing-cv-field {
+            display: none; /* Hidden by default, shown when checkbox is checked */
         }
     </style>
 </head>
@@ -54,19 +117,20 @@
         <h1>Upload Your Current CV File</h1>
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <div>
+            <div class="form-check form-check-inline">
+                <label for="{{ form.use_existing_cv.id_for_label }}" class="form-check-label">Use an existing CV?</label>
                 {{ form.use_existing_cv }}
-                <label for="{{ form.use_existing_cv.id_for_label }}">Use an existing CV?</label>
             </div>
 
-            <div id="existing-cv-field" style="display: none;">
+            <div id="existing-cv-field">
                 {{ form.existing_cv.label_tag }}
                 {{ form.existing_cv }}
             </div>
 
-            <div id="upload-file-field" style="display: block;">
-                {{ form.file.label_tag }}
-                {{ form.file }}
+            <div id="upload-file-field">
+                <div class="file-input-wrapper">
+                    {{ form.file }}
+                </div>
             </div>
 
             <button type="submit" class="btn btn-primary">Upload</button>

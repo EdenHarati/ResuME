@@ -1,11 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Successful</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #102a43; /* Dark blue background */
+            color: #ffffff; /* White text color */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            background-color: #243b53; /* Slightly lighter blue for contrast */
+            border: 1px solid #334e68;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 600px;
+            width: 100%;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        h1 {
+            color: #f0f4f8; /* Light text color */
+            margin-bottom: 20px; /* Spacing below the heading */
+        }
+        p {
+            color: #f0f4f8; /* Light text color */
+            margin-bottom: 20px; /* Spacing below the paragraph */
+        }
+    </style>
 </head>
 <body>
-    <h1>Registration Successful</h1>
-    <p>Welcome, {{ user.username }}! Your account has been created successfully.</p>
-
+    <div class="container">
+        <h1>Registration Successful</h1>
+        <p>Welcome, {{ user.username }}! Your account has been created successfully.</p>
+    </div>
 </body>
 </html>
