@@ -30,35 +30,108 @@
             width: 30%;
             margin: 10px;
             padding: 20px;
-            overflow-y: auto;
             height: 400px;
+            overflow-y: hidden; 
         }
         .box h2 {
             font-size: 18px;
             margin-bottom: 10px;
             color: #555;
         }
-        .box pre {
-            white-space: pre-wrap; /* Preserve whitespace and line breaks */
-            word-wrap: break-word; /* Break long words */
+        .box textarea {
+            width: 100%;
+            height: calc(100% - 30px); /* Adjust height to fit within the box */
+            border: none;
+            resize: none;
+            outline: none;
+            background-color: transparent;
+            color: #555;
+            font-size: 14px;
+        }
+        .form-group {
+            margin-top: 20px;
+        }
+        .form-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+        .form-container .form-group {
+            flex: 1;
+            margin-right: 10px;
+        }
+        .form-container .form-group:last-child {
+            margin-right: 0;
+        }
+        .form-container .form-group textarea {
+            width: 100%;
+            height: 400px; /* Match the height of the .box elements */
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            font-size: 14px;
+        }
+        .notes-container {
+            width: 100%;
+            margin-top: 20px;
+        }
+        .notes-container textarea {
+            width: 100%;
+            height: 100px; /* Adjust height as needed */
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            font-size: 14px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .button-container button {
+            margin-right: 10px;
+        }
+        .button-container button:last-child {
+            margin-right: 0;
+        }
+        .btn-green {
+            background-color: green;
+            color: white;
         }
     </style>
 </head>
 <body>
     <h1>Here is your new CV!</h1>
+    <form method="post" action="{% url 'upload_success' %}">
+        {% csrf_token %}
+        <div class="container">
+            <div class="box">
+                <h2>Base CV</h2>
+                <textarea class="form-control" id="base_cv" name="base_cv">{{ current_cv }}</textarea>
+            </div>
+            <div class="box">
+                <h2>Job Description</h2>
+                <textarea class="form-control" id="job_description" name="job_description">{{ role_description }}</textarea>
+            </div>
+            <div class="box">
+                <h2>Generated CV</h2>
+                <textarea readonly>{{ result | safe }}</textarea>
+            </div>
+        </div>
+        <div class="notes-container">
+            <h2>Notes</h2>
+            <textarea class="form-control" id="notes" name="notes"></textarea>
+        </div>
+        <div class="button-container">
+            <button type="submit" class="btn btn-primary">Regenerate</button>
+            <form id="upload-cv-form" action="{% url 'save_generated_cv' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-green">Save CV</button>
+            </form>
+        </div>
+    </form>
     <div class="container">
-        <div class="box">
-            <h2>Base CV</h2>
-            <pre>{{ current_cv }}</pre>
-        </div>
-        <div class="box">
-            <h2>Job Description</h2>
-            <pre>{{ role_description }}</pre>
-        </div>
-        <div class="box">
-            <h2>Generated CV</h2>
-            <pre>{{ result | linebreaks }}</pre>
-        </div>
         <a href="{% url 'sign_out' %}">Sign Out</a>
     </div>
 </body>
