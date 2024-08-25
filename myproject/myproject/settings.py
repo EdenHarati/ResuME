@@ -12,6 +12,26 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 from pathlib import Path
 
+from decouple import Config, Csv
+from pathlib import Path
+
+# Initialize Config
+BASE_DIR = Path(__file__).resolve().parent.parent
+config = Config(BASE_DIR / '.env')
+
+# settings.py
+
+# Read SECRET_KEY from .env
+SECRET_KEY = config('SECRET_KEY')
+
+# Read DEBUG from .env
+DEBUG = config('DEBUG', default=False, cast=bool)
+
+# Read ALLOWED_HOSTS from .env
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='').split(',')
+
+# Read API_KEY from .env
+API_KEY = config('API_KEY')
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -27,7 +47,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-c=8s68827b4_$4!jx$6#-*706osb9e8ik7-fbo4mkc85z&++yi'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -126,3 +146,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+

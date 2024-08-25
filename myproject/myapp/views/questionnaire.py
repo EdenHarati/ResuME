@@ -2,6 +2,7 @@ import openai
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
+from myproject.myproject import settings
 
 
 def generate_cv(questionnaire_data, api_key):
@@ -77,7 +78,7 @@ class QuestionnaireView(LoginRequiredMixin, View):
         }
 
         # Generate the CV using OpenAI
-        api_key = 'sk-'
+        api_key = settings.API_KEY
         generated_cv = generate_cv(data, api_key)
 
         # Save the generated CV to the session or process it as needed
