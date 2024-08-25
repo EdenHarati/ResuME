@@ -7,29 +7,52 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <style>
         body {
-            background-color: white;
-            color: blue;
+            background-color: #102a43; /* Dark blue background */
+            color: #ffffff; /* White text color */
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
         }
         .container {
             max-width: 600px;
             padding: 20px;
-            background-color: #d2d8da;
-            border-radius: 5px;
+            background-color: #243b53; /* Slightly lighter blue for contrast */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             text-align: center;
         }
-        .container form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        h1 {
+            color: #f25c54; /* Red color for headers */
+            margin-bottom: 20px;
         }
-        .container form button,
-        .container form a {
+        .btn-primary {
+            background-color: #f25c54; /* Red button color */
+            border: none;
+            color: #ffffff;
+            border-radius: 4px;
+            padding: 10px;
+            font-size: 16px;
+            width: 100%; /* Full width for buttons */
             margin-top: 10px;
-            width: 400px;
+        }
+        .btn-primary:hover {
+            background-color: #e03e3e; /* Slightly darker red for hover effect */
+        }
+        .btn-secondary {
+            background-color: #6c757d; /* Grey color for secondary button */
+            border: none;
+            color: #ffffff;
+            border-radius: 4px;
+            padding: 10px;
+            font-size: 16px;
+            width: 100%; /* Full width for buttons */
+            margin-top: 10px;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268; /* Slightly darker grey for hover effect */
         }
     </style>
 </head>
