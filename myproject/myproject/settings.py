@@ -12,8 +12,15 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 from pathlib import Path
 
-from decouple import Config, Csv
+from decouple import Config, Csv, config
 from pathlib import Path
+
+from decouple import config, Csv
+
+SECRET_KEY = config('SECRET_KEY')
+DEBUG = config('DEBUG', default=False, cast=bool)
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='', cast=Csv())
+
 
 # Initialize Config
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -51,6 +58,9 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['104.197.121.101']
 
+
+
+SECRET_KEY = config('SECRET_KEY')
 
 # Application definition
 
