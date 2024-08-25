@@ -10,7 +10,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.core.files.base import ContentFile
 from django.http import JsonResponse
-api_key = "sk-"
+from myproject.myproject import settings
+
+api_key = settings.API_KEY
 
 class UploadCVFileView(LoginRequiredMixin, View):
 
