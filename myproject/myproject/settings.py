@@ -12,6 +12,16 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 from pathlib import Path
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'djongo',
+        'NAME': 'Cluster0',
+        'ENFORCE_SCHEMA': False,
+        'CLIENT': {
+            'host': 'mongodb+srv://dorsegev262:iZAHKMIC8VKNjVPN@cluster0.kjpbg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+        }
+    }
+}
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -80,10 +90,15 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'djongo',
+        'NAME': 'Cluster0',
+        'ENFORCE_SCHEMA': False,
+        'CLIENT': {
+            'host': 'mongodb+srv://dorsegev262:iZAHKMIC8VKNjVPN@cluster0.kjpbg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+        }
     }
 }
+
 
 
 # Password validation
