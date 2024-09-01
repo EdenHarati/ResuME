@@ -192,6 +192,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'djongo',
     'myapp',
 ]
 
@@ -228,8 +229,12 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 # Database
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'djongo',
+        'NAME': 'Cluster0',
+        'ENFORCE_SCHEMA': False,
+        'CLIENT': {
+            'host': 'mongodb+srv://dorsegev262:iZAHKMIC8VKNjVPN@cluster0.kjpbg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+        }
     }
 }
 
