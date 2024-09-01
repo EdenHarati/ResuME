@@ -236,8 +236,8 @@ DATABASES = {
             'host': 'mongodb+srv://dorsegev262:iZAHKMIC8VKNjVPN@cluster0.kjpbg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0',
             'ssl': True,
             'tlsAllowInvalidCertificates': True,
-            'username': dorsegev262,
-            'password': iZAHKMIC8VKNjVPN
+            'username': 'dorsegev262',
+            'password': 'iZAHKMIC8VKNjVPN'
         }
     }
 }
