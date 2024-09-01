@@ -233,7 +233,9 @@ DATABASES = {
         'NAME': 'Cluster0',
         'ENFORCE_SCHEMA': False,
         'CLIENT': {
-            'host': 'mongodb+srv://dorsegev262:iZAHKMIC8VKNjVPN@cluster0.kjpbg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+            'host': 'mongodb+srv://dorsegev262:iZAHKMIC8VKNjVPN@cluster0.kjpbg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0',
+            'ssl': True,
+            'tlsAllowInvalidCertificates': True
         }
     }
 }
