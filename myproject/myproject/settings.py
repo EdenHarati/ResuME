@@ -158,7 +158,6 @@
 # DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #
 #
-
 """
 Django settings for myproject project.
 
@@ -174,6 +173,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 from pathlib import Path
 from decouple import config, Csv
+from pymongo import MongoClient
+from pymongo.server_api import ServerApi
 
 # Initialize BASE_DIR
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -192,7 +193,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'djongo',
     'myapp',
 ]
 
@@ -226,19 +226,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'myproject.wsgi.application'
 
-# Database
 DATABASES = {
     'default': {
-        'ENGINE': 'djongo',
-        'NAME': 'Cluster0',
-        'ENFORCE_SCHEMA': False,
-        'CLIENT': {
-            'host': 'mongodb+srv://dorsegev262:iZAHKMIC8VKNjVPN@cluster0.kjpbg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0',
-            'ssl': True,
-            'tlsAllowInvalidCertificates': True,
-            'username': 'dorsegev262',
-            'password': 'iZAHKMIC8VKNjVPN'
-        }
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
