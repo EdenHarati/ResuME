@@ -185,19 +185,6 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='', cast=Csv())
 API_KEY = config('API_KEY')
 
-# MongoDB Connection Setup
-MONGO_URI = "mongodb+srv://harati12:<your_password>@resume.6vsvc.mongodb.net/?retryWrites=true&w=majority&appName=ResuMe"
-
-# Create MongoDB client
-client = MongoClient(MONGO_URI, server_api=ServerApi('1'))
-
-# Test MongoDB connection
-try:
-    client.admin.command('ping')
-    print("Pinged your MongoDB deployment. Successfully connected!")
-except Exception as e:
-    print(f"Error: {e}")
-
 # Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -206,7 +193,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'djongo',  # MongoDB support
     'myapp',
 ]
 
@@ -240,19 +226,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'myproject.wsgi.application'
 
-# Database
 DATABASES = {
     'default': {
-        'ENGINE': 'djongo',
-        'NAME': 'Cluster0',
-        'ENFORCE_SCHEMA': False,
-        'CLIENT': {
-            'host': 'mongodb+srv://harati12:harati12@resume.6vsvc.mongodb.net/?retryWrites=true&w=majority&appName=ResuMe',
-            'ssl': True,
-            'tlsAllowInvalidCertificates': True,
-            'username': 'harati12',
-            'password': 'harati12'
-        }
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
